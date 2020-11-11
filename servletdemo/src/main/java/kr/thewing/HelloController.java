@@ -2,16 +2,37 @@ package kr.thewing;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HelloController {
 
     @Autowired
     HelloService helloService;
+
+
+//    /**
+//     * /hello/1?name=sunjun&age=26
+//     * @param id
+//     * @param name
+//     * @return
+//     */
+//    @GetMapping("/hello/{id}")
+//    @ResponseBody
+//    public String hello(@PathVariable int id, @RequestParam String name) {
+//        return "Hello, "+ helloService.getName();
+//    }
+//    /**
+//     * /hello/1?name=sunjun&age=26
+//     * @param id
+//     * @param user
+//     * @return
+//     */
+//    @GetMapping("/hello/{id}")
+//    @ResponseBody
+//    public String hello(@PathVariable int id, @ModelAttribute User user) {
+//        return "Hello, "+ helloService.getName();
+//    }
 
     @GetMapping("/hello")
     @ResponseBody
