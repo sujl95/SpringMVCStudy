@@ -3,10 +3,12 @@ package me.thewing.demobootweb;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.CacheControl;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 //Web과 관련된 Bean으로 인식하여 등록
@@ -39,4 +41,16 @@ public class WebConfig implements WebMvcConfigurer {
 
                 ;
     }
+
+//    // add하는 순간 기본 컨버터를 사용하지 못한다.
+//    @Override
+//    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//
+//    }
+//
+//    // 추가해서 메세지 컨버터를 사용해도 된다. 주로 사용하진 않음
+//    @Override
+//    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+//
+//    }
 }
