@@ -7,7 +7,7 @@ import java.text.ParseException;
 import java.util.Locale;
 
 //Web과 관련된 빈으로 인식하지 못해서 테스트 하지못한다
-@Component
+//@Component
 public class PersonFormatter implements Formatter<Person> {
 
     @Override
