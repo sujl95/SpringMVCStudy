@@ -1,5 +1,6 @@
 package me.thewing.demobootweb;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import me.thewing.demobootweb.Repository.PersonRepository;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,6 +27,28 @@ class SampleControllerTest {
 
     @Autowired
     PersonRepository personRepository;
+
+    //Spring Boot에서 자동을 등록된다
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @Test
+    public void jsonMessage() throws Exception {
+        //jackson2 컨버터
+        Person person = new Person();
+        person.setId(2020l);
+        person.setName("sungjun");
+
+        String jsonString = objectMapper.writeValueAsString(person);
+
+        this.mockMvc.perform(get("/jsonMessage")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .content(jsonString))
+                .andDo(print())
+                .andExpect(status().isOk())
+                ;
+    }
 
     @Test
     public void hello() throws Exception{
