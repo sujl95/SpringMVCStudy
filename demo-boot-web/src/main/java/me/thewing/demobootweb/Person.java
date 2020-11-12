@@ -3,7 +3,9 @@ package me.thewing.demobootweb;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement //JAXB 에서 사용하는 XML 이것을 선언해줘야 JAXB 가 변환이 가능
 @Entity
 public class Person {
 

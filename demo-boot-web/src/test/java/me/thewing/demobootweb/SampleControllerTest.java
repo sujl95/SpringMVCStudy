@@ -10,7 +10,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.oxm.Marshaller;
 import org.springframework.test.web.servlet.MockMvc;
+
+
+import javax.xml.transform.Result;
+import javax.xml.transform.stream.StreamResult;
+
+import java.io.StringWriter;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -32,6 +39,9 @@ class SampleControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
+    @Autowired
+    Marshaller marshaller;
+
     @Test
     public void jsonMessage() throws Exception {
         //jackson2 컨버터
@@ -47,7 +57,34 @@ class SampleControllerTest {
                     .content(jsonString))
                 .andDo(print())
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(2020))
+                .andExpect(jsonPath("$.name").value("sungjun"))
                 ;
+    }
+
+    @Test
+    public void xmlMessage() throws Exception {
+        //JAX2B 컨버터
+        Person person = new Person();
+        person.setId(2020l);
+        person.setName("sungjun");
+        //XML 변환 문자로 바꿔야한다
+
+        StringWriter stringWriter = new StringWriter();
+        Result result = new StreamResult(stringWriter);
+        marshaller.marshal(person, result); // person 객체를 변환
+
+        String xmlString = stringWriter.toString(); //xml을 꺼낸다
+
+        this.mockMvc.perform(get("/jsonMessage")
+                .contentType(MediaType.APPLICATION_XML)
+                .accept(MediaType.APPLICATION_XML)
+                .content(xmlString))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(xpath("person/name").string("sungjun"))
+                .andExpect(xpath("person/id").string("2020"))
+        ;
     }
 
     @Test
