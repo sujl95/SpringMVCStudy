@@ -36,7 +36,6 @@ public class SampleController {
 
     @GetMapping("/hello")
     public String hello(@RequestParam("id")Person person) {
-        System.out.println(person);
         return "hello " + person.getName();
     }
 

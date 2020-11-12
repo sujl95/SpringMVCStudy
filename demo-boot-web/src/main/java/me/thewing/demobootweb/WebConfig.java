@@ -8,6 +8,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
@@ -62,4 +63,9 @@ public class WebConfig implements WebMvcConfigurer {
         jaxb2Marshaller.setPackagesToScan(Person.class.getPackageName()); //패키지 이름 정의
         return jaxb2Marshaller;
     }
+
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/hi").setViewName("hi");
+//    }
 }
