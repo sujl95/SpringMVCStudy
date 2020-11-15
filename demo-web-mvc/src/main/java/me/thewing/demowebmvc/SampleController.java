@@ -1,12 +1,23 @@
 package me.thewing.demowebmvc;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+//@RequestMapping(consumes = MediaType.APPLICATION_XML_VALUE)
 @Controller
-@RequestMapping("/hello")
 public class SampleController {
 
+    @RequestMapping(
+            value = "/hello",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.TEXT_PLAIN_VALUE
+
+    )
+    @ResponseBody
+    public String hello() {
+        return "hello";
+    }
 
 //    @RequestMapping(value = "/hello",method = {RequestMethod.GET,RequestMethod.PUT}) //
 //    @GetMapping({"/hello" , "/hi"}) //이렇게도 사용가능
@@ -28,9 +39,10 @@ public class SampleController {
 //        return "hello";
 //    }
 
-    @RequestMapping("/sungjun")
-    @ResponseBody
-    public String helloSungjun() {
-        return "hello sungjun";
-    }
+//    @RequestMapping("/sungjun")
+//    @ResponseBody
+//    public String helloSungjun() {
+//        return "hello sungjun";
+//    }
 }
+
