@@ -18,8 +18,6 @@ public class SampleController {
         return event;
     }
 
-
-
 //    @GetMapping("/hello")
 //    @ResponseBody
 //    public String hello() {
