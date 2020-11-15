@@ -28,6 +28,7 @@ public class SampleControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+
     @Test
     public void helloTest() throws Exception {
         mockMvc.perform(get("/hello"))
@@ -38,48 +39,67 @@ public class SampleControllerTest {
 
     @Test
     public void getEvents() throws Exception {
-        mockMvc.perform(get("/events"))
+        mockMvc.perform(get("/events/1;name=sungjun"))
                 .andDo(print())
                 .andExpect(status().isOk())
-        ;
+                .andExpect(jsonPath("id").value(1))
+                ;
     }
 
-    @Test
-    public void getEventWithId() throws Exception {
-        mockMvc.perform(get("/events/1"))
-                .andExpect(status().isOk());
-        mockMvc.perform(get("/events/2"))
-                .andExpect(status().isOk());
-        mockMvc.perform(get("/events/3"))
-                .andExpect(status().isOk());
-    }
 
-    @Test
-    public void createEvent() throws Exception {
-        mockMvc.perform(post("/events")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk())
-        .andDo(print())
 
-        ;
-    }
-
-    @Test
-    public void deleteEvent() throws Exception {
-        mockMvc.perform(delete("/events/1"))
-                .andExpect(status().isOk());
-        mockMvc.perform(delete("/events/2"))
-                .andExpect(status().isOk());
-        mockMvc.perform(delete("/events/3"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void updateEvent() throws Exception {
-        mockMvc.perform(put("/events")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
+//    @Test
+//    public void helloTest() throws Exception {
+//        mockMvc.perform(get("/hello"))
+//                .andDo(print())
+//                .andExpect(status().isOk())
+//        ;
+//    }
+//
+//    @Test
+//    public void getEvents() throws Exception {
+//        mockMvc.perform(get("/events"))
+//                .andDo(print())
+//                .andExpect(status().isOk())
+//        ;
+//    }
+//
+//    @Test
+//    public void getEventWithId() throws Exception {
+//        mockMvc.perform(get("/events/1"))
+//                .andExpect(status().isOk());
+//        mockMvc.perform(get("/events/2"))
+//                .andExpect(status().isOk());
+//        mockMvc.perform(get("/events/3"))
+//                .andExpect(status().isOk());
+//    }
+//
+//    @Test
+//    public void createEvent() throws Exception {
+//        mockMvc.perform(post("/events")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .accept(MediaType.APPLICATION_JSON)
+//        ).andExpect(status().isOk())
+//        .andDo(print())
+//
+//        ;
+//    }
+//
+//    @Test
+//    public void deleteEvent() throws Exception {
+//        mockMvc.perform(delete("/events/1"))
+//                .andExpect(status().isOk());
+//        mockMvc.perform(delete("/events/2"))
+//                .andExpect(status().isOk());
+//        mockMvc.perform(delete("/events/3"))
+//                .andExpect(status().isOk());
+//    }
+//
+//    @Test
+//    public void updateEvent() throws Exception {
+//        mockMvc.perform(put("/events")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk());
+//    }
 }
