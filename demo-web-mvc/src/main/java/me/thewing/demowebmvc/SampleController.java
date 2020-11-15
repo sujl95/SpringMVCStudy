@@ -10,18 +10,22 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class SampleController {
 
-    @GetMapping("/hello")
-    @ResponseBody
-    public String hello() {
-        return "hello";
-    }
 
-    @PostMapping("/hello")
-    @ResponseBody
-    public String helloPost() {
-        return "hello";
-    }
 
+
+
+//    @GetMapping("/hello")
+//    @ResponseBody
+//    public String hello() {
+//        return "hello";
+//    }
+//
+//    @PostMapping("/hello")
+//    @ResponseBody
+//    public String helloPost() {
+//        return "hello";
+//    }
+//
 //    @PostMapping(
 //            value = "/events",
 //            consumes = MediaType.APPLICATION_JSON_VALUE
@@ -30,20 +34,20 @@ public class SampleController {
 //    public String createEvent() {
 //        return "events";
 //    }
-
-
-    @GetMapping("/events/{id}")
-    @ResponseBody
-    public String getAnEvents(@PathVariable Long id) {
-        return "events";
-    }
-
-    @DeleteMapping("/events/{id}")
-    @ResponseBody
-    public String deleteAnEvents(@PathVariable Long id) {
-        return "events";
-    }
-
+//
+//
+//    @GetMapping("/events/{id}")
+//    @ResponseBody
+//    public String getAnEvents(@PathVariable Long id) {
+//        return "events";
+//    }
+//
+//    @DeleteMapping("/events/{id}")
+//    @ResponseBody
+//    public String deleteAnEvents(@PathVariable Long id) {
+//        return "events";
+//    }
+//
 //    @PutMapping(
 //            value = "/events",
 //            consumes = MediaType.APPLICATION_JSON_VALUE
@@ -52,7 +56,7 @@ public class SampleController {
 //    public String updateEvent() {
 //        return "events";
 //    }
-
+//
 //    @RequestMapping(value = "/hello",method = {RequestMethod.GET,RequestMethod.PUT}) //
 //    @GetMapping({"/hello" , "/hi"}) //이렇게도 사용가능
 //    @GetMapping("/hello")
@@ -66,13 +70,13 @@ public class SampleController {
 //    public String helloSungjun() {
 //        return "hello sungjun";
 //    }
-
+//
 //    @RequestMapping("/**")
 //    @ResponseBody
 //    public String hello() {
 //        return "hello";
 //    }
-
+//
 //    @RequestMapping("/sungjun")
 //    @ResponseBody
 //    public String helloSungjun() {
