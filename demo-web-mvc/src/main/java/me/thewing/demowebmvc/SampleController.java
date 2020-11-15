@@ -6,18 +6,52 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-//@RequestMapping(consumes = MediaType.APPLICATION_XML_VALUE)
+@RequestMapping(produces = MediaType.APPLICATION_XML_VALUE)
 @Controller
 public class SampleController {
 
-    @GetMapping(
-            value = "/hello",
-            params = "!name"
-    )
+    @GetMapping("/hello")
     @ResponseBody
     public String hello() {
         return "hello";
     }
+
+    @PostMapping("/hello")
+    @ResponseBody
+    public String helloPost() {
+        return "hello";
+    }
+
+//    @PostMapping(
+//            value = "/events",
+//            consumes = MediaType.APPLICATION_JSON_VALUE
+//    )
+//    @ResponseBody
+//    public String createEvent() {
+//        return "events";
+//    }
+
+
+    @GetMapping("/events/{id}")
+    @ResponseBody
+    public String getAnEvents(@PathVariable Long id) {
+        return "events";
+    }
+
+    @DeleteMapping("/events/{id}")
+    @ResponseBody
+    public String deleteAnEvents(@PathVariable Long id) {
+        return "events";
+    }
+
+//    @PutMapping(
+//            value = "/events",
+//            consumes = MediaType.APPLICATION_JSON_VALUE
+//    )
+//    @ResponseBody
+//    public String updateEvent() {
+//        return "events";
+//    }
 
 //    @RequestMapping(value = "/hello",method = {RequestMethod.GET,RequestMethod.PUT}) //
 //    @GetMapping({"/hello" , "/hi"}) //이렇게도 사용가능

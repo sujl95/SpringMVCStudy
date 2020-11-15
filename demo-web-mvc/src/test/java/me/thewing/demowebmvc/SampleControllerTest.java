@@ -1,5 +1,6 @@
 package me.thewing.demowebmvc;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,11 +22,56 @@ public class SampleControllerTest {
 
     @Test
     public void helloTest() throws Exception {
-        mockMvc.perform(get("/hello")
-                .param("name","sungjun")
-        )
+        mockMvc.perform(get("/hello"))
                 .andDo(print())
                 .andExpect(status().isOk())
         ;
+    }
+
+    @Test
+    public void getEvents() throws Exception {
+        mockMvc.perform(get("/events"))
+                .andDo(print())
+                .andExpect(status().isOk())
+        ;
+    }
+
+    @Test
+    public void getEventWithId() throws Exception {
+        mockMvc.perform(get("/events/1"))
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/events/2"))
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/events/3"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void createEvent() throws Exception {
+        mockMvc.perform(post("/events")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk())
+        .andDo(print())
+
+        ;
+    }
+
+    @Test
+    public void deleteEvent() throws Exception {
+        mockMvc.perform(delete("/events/1"))
+                .andExpect(status().isOk());
+        mockMvc.perform(delete("/events/2"))
+                .andExpect(status().isOk());
+        mockMvc.perform(delete("/events/3"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void updateEvent() throws Exception {
+        mockMvc.perform(put("/events")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }
