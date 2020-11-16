@@ -9,6 +9,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,10 @@ public class SampleController {
 
 
     @GetMapping("/events/list")
-    public String getEvents(Model model) {
+    public String getEvents(Model model,HttpSession httpSession,
+                            @SessionAttribute LocalDateTime visitTime) {
+        System.out.println("httpSession = " + httpSession.getAttribute("visitTime")); //접속 시간 알림 할때 예제 사용
+        System.out.println("visitTime = " + visitTime);
         Event event = new Event();
         event.setName("spring");
         event.setLimit(10);
