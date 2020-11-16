@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.*;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import java.time.ZoneId;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,13 +50,16 @@ public class SampleControllerTest {
 
     @Test
     public void postEvents() throws Exception {
-        mockMvc.perform(post("/events/name/sungjun")
-                    .param("limit", "a10")
+        ResultActions result = mockMvc.perform(post("/events")
+                .param("name", "sungjun")
+                .param("limit", "-10")
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("sungjun"))
-                ;
+                .andExpect(model().hasErrors());
+        ModelAndView mav = result.andReturn().getModelAndView();
+        Map<String, Object> model = mav.getModel();
+        System.out.println(model.size());
     }
 
 
