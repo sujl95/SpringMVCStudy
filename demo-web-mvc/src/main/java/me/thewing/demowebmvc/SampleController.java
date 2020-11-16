@@ -5,20 +5,23 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Controller
+@SessionAttributes("event")
 public class SampleController {
 
     @GetMapping("/events/form")
     public String eventsForm(Model model) {
         Event newEvent = new Event();
         newEvent.setLimit(50);
-        model.addAttribute("event", newEvent);
+        model.addAttribute("event", newEvent); //모델 addAttribute와 SessionAttributes 키 값이 같다면 동일하게 넣어준다
         return "events/form";
     }
 
@@ -34,14 +37,11 @@ public class SampleController {
 //    @ResponseBody
     public String createEvent(@Validated @ModelAttribute Event event,
                            BindingResult bindingResult,
-                           Model model) {
+                           SessionStatus sessionStatus) {
         if (bindingResult.hasErrors()) {
             return "/events/form";
         }
-        List<Event> eventList = new ArrayList<>();
-        eventList.add(event);
-//        model.addAttribute("eventList", eventList);
-        model.addAttribute(eventList);
+        sessionStatus.setComplete();
         return "redirect:/events/list";
     }
 
