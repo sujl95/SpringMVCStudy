@@ -28,6 +28,14 @@ public class SampleControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    @Test
+    public void eventForm() throws Exception {
+        mockMvc.perform(get("/events/form"))
+                .andDo(print())
+                .andExpect(view().name("events/form"))
+                .andExpect(model().attributeExists("event"))
+        ;
+    }
 
     @Test
     public void helloTest() throws Exception {

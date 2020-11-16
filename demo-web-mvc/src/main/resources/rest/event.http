@@ -1,0 +1,20 @@
+# Event GET Test
+GET http://localhost:8080/events/form
+
+###
+# Event POST Test
+POST http://localhost:8080/events?name=springmvc&limit=20
+
+###
+#Content-Type: application/json
+POST http://localhost:8080/events
+Content-Type: application/json
+
+{
+  "name": "springmvc",
+  "limit": 25
+}
+
+
+
+
