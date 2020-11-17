@@ -18,7 +18,7 @@ public class BaseController {
         return "error";
     }
 
-    @InitBinder("event") //event로 바인딩 받을 때만 설정 가능
+    @InitBinder("event") // event 로 바인딩 받을 때만 설정 가능
     public void initEventBinder(WebDataBinder webDataBinder) { // WebDataBinder 반드시 필요
         webDataBinder.setDisallowedFields("id"); //setDisallowedFields 받고 싶지 않은 필드 값을 거를 수 있다
         webDataBinder.addValidators(new EventValidator());
