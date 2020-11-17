@@ -22,29 +22,6 @@ import java.util.List;
 @SessionAttributes("event")
 public class EventController {
 
-    @ExceptionHandler({EventException.class, RuntimeException.class}) // 타입을 둘다 받을 수 있는 상위타입으로 지정해야한다
-    public String eventErrorHandler(RuntimeException exception, Model model) {
-        model.addAttribute("message", "runtime error");
-        return "error";
-    }
-//
-//    @ExceptionHandler
-//    public String runtimeErrorHandler(RuntimeException exception, Model model) {
-//        model.addAttribute("message", "runtime error");
-//        return "error";
-//    }
-
-    @InitBinder("event") //event로 바인딩 받을 때만 설정 가능
-    public void initEventBinder(WebDataBinder webDataBinder) { // WebDataBinder 반드시 필요
-        webDataBinder.setDisallowedFields("id"); //setDisallowedFields 받고 싶지 않은 필드 값을 거를 수 있다
-        webDataBinder.addValidators(new EventValidator());
-    }
-
-    @ModelAttribute
-    public void categories(Model model) {
-        model.addAttribute("categories", List.of("study", "seminar", "hobby", "social"));
-    }
-
     @GetMapping("/events/form/name")
     public String eventsFormName(Model model) {
         throw new EventException();
