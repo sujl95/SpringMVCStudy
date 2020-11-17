@@ -50,14 +50,14 @@ public class SampleController {
             return "/events/form-limit";
         }
         sessionStatus.setComplete();
-        attributes.addAttribute("name", event.getName());
-        attributes.addAttribute("limit", event.getLimit());
+        attributes.addFlashAttribute("newEvent", event);
         return "redirect:/events/list";
     }
 
 
     @GetMapping("/events/list")
-    public String getEvents(@ModelAttribute("newEvent") Event event,
+    public String getEvents(
+//            @ModelAttribute("newEvent") Event event,
                             Model model,
                             @SessionAttribute LocalDateTime visitTime) {
         System.out.println("visitTime = " + visitTime);
@@ -65,9 +65,12 @@ public class SampleController {
         Event spring = new Event();
         spring.setName("spring");
         spring.setLimit(10);
+
+        Event newEvent = (Event) model.asMap().get("newEvent"); //모델에서 가져올 수 있다.
+
         List<Event> eventList = new ArrayList<>();
         eventList.add(spring);
-        eventList.add(event);
+        eventList.add(newEvent);
 
         model.addAttribute(eventList);
         return "/events/list";

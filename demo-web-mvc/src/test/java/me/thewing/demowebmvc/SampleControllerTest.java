@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.Map;
@@ -66,6 +67,22 @@ public class SampleControllerTest {
         ModelAndView mav = result.andReturn().getModelAndView();
         Map<String, Object> model = mav.getModel();
         System.out.println(model.size());
+    }
+
+    @Test
+    public void getEvents() throws Exception {
+        Event newEvent = new Event();
+        newEvent.setName("Winter is coming");
+        newEvent.setLimit(2000);
+
+        mockMvc.perform(get("/events/list")
+                .sessionAttr("visitTime", LocalDateTime.now())
+                .flashAttr("newEvent", newEvent))
+                    .andDo(print())
+                    .andExpect(status().isOk())
+//                    .andExpect(xpath("//p").nodeCount(2))
+        ;
+
     }
 
 
