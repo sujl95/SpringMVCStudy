@@ -1,9 +1,11 @@
 package me.thewing.demowebmvc;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -18,6 +20,16 @@ import java.util.List;
 @Controller
 @SessionAttributes("event")
 public class EventController {
+
+//    @Autowired
+//    EventValidator eventValidator;
+
+
+    @InitBinder("event") //event로 바인딩 받을 때만 설정 가능
+    public void initEventBinder(WebDataBinder webDataBinder) { // WebDataBinder 반드시 필요
+        webDataBinder.setDisallowedFields("id"); //setDisallowedFields 받고 싶지 않은 필드 값을 거를 수 있다
+        webDataBinder.addValidators(new EventValidator());
+    }
 
     @ModelAttribute
     public void categories(Model model) {
@@ -37,6 +49,7 @@ public class EventController {
         if (bindingResult.hasErrors()) {
             return "/events/form-name";
         }
+//        eventValidator.validate(event, bindingResult);
         return "redirect:/events/form/limit";
     }
 
