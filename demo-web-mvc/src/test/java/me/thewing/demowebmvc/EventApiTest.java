@@ -35,11 +35,10 @@ public class EventApiTest {
 
         mockMvc.perform(post("/api/events")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
+                .content(json)
+                .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("sungjun"))
-                .andExpect(jsonPath("limit").value(-26))
+                .andExpect(status().isBadRequest())
     ;
     }
 }
