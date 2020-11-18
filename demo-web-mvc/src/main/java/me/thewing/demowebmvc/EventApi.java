@@ -19,7 +19,6 @@ public class EventApi {
         return ResponseEntity.badRequest().body("can't create event error");
     }
 
-
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody @Valid Event event, BindingResult bindingResult) {
         //save event
